@@ -12,3 +12,4 @@ spec:
     git:
       uri: 'https://github.com/olivierbegon/rosa.git'
     contextDir: docker-httpd
+
