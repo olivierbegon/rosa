@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: qotd-build-and-deploy
+  namespace: pipelines-tutorial
+  labels:
+    learn-pipelines: pipeline
+    sandbox: learn-pipelines
+    tekton.dev/pipeline: qotd-build-and-deploy
+spec:
+  params:
+    - name: git-url
+      value: 'https://github.com/redhat-developer-demos/openshift-pipelines-workshop.git'
+    - name: IMAGE
+      value: 'image-registry.openshift-image-registry.svc:5000/pipelines-tutorial/qotd:latest'
+    - name: revision
+      value: 'master'
+  pipelineRef:
+    name: qotd-build-and-deploy
+  taskRunTemplate:
+    serviceAccountName: pipeline
+  timeouts:
+    pipeline: 1h0m0s
+  workspaces:
+    - name: shared-workspace
+      emptyDir: {}
+  taskRunSpecs:
+    - pipelineTaskName: fetch-repository
+      computeResources:
+        requests:
+          cpu: "250m"
+          memory: "512Mi"
+

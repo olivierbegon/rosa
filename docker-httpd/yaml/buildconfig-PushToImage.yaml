@@ -1,0 +1,18 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: docker-httpd
+  namespace: test
+spec:
+  strategy:
+    type: Docker
+    dockerStrategy: {}
+  source:
+    type: Git
+    git:
+      uri: 'https://github.com/olivierbegon/rosa.git'
+    contextDir: docker-httpd
+  output:
+    to:
+      kind: DockerImage
+      name: 'image-registry.openshift-image-registry.svc:5000/test/docker-httpd'

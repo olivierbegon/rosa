@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: hello-pipeline
+spec:
+  params:
+    - name: person
+      description: Name of person to greet
+      default: World
+      type: string
+  tasks:
+    - name: hello-task
+      taskRef:
+        name: hello
+      params:
+        - name: person
+          value: $(params.person) 
