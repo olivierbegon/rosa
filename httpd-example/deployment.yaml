@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: httpd-example
+  annotations:
+    description: "Defines how to deploy the application server"
+    template.alpha.openshift.io/wait-for-ready: "true"
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"httpd-example:latest"},"fieldPath": "spec.template.spec.containers[0].image"}]'
+spec:
+  strategy:
+    type: RollingUpdate
+  replicas: 1
+  selector:
+    matchLabels:
+      name: httpd-example
+  template:
+    metadata:
+      name: httpd-example
+      labels:
+        name: httpd-example
+    spec:
+      containers:
+        - name: httpd-example
+          image: "image-registry.openshift-image-registry.svc:5000/test/httpd-ex:latest"
+          ports:
+            - containerPort: 8080
+          resources:
+          

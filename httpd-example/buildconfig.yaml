@@ -1,0 +1,30 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: httpd-example
+spec:
+  strategy:
+    type: Docker
+    dockerStrategy: {}
+  source:
+    type: Dockerfile
+    dockerfile: |-
+      FROM registry.redhat.io/rhscl/httpd-24-rhel7
+      
+      #COPY html/index.html /var/www/html/
+      RUN echo $'<html>\n\
+      <head>\n\
+          <title>Hello, world!</title>\n\
+      </head>\n\
+      \n\
+      <body>\n\
+          <h1>Hello, world! How are ya?</h1>\n\
+          <p>This is a test of my brand new Docker container!</p>\n\
+      </body>\n\
+      </html>' > /var/www/html/index.html
+      # The run script uses standard ways to run the application
+      CMD run-httpd
+  output:
+    to:
+      kind: DockerImage
+      name: 'image-registry.openshift-image-registry.svc:5000/test/httpd-example:latest'

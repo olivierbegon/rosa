@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: docker-httpd
+  namespace: test
+  labels:
+    app: docker-httpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-httpd
+  template:
+    metadata:
+      labels:
+        app: docker-httpd
+    spec:
+      containers:
+      - name: docker-httpd
+        image: image-registry.openshift-image-registry.svc:5000/test/docker-httpd:latest
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: 500m
+          requests:
+            memory: 256Mi
+            cpu: 100m 

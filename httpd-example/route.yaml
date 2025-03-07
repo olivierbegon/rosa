@@ -1,0 +1,9 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: httpd-example
+spec:
+  host: ""  # APPLICATION_DOMAIN is empty by default
+  to:
+    kind: Service
+    name: httpd-example
