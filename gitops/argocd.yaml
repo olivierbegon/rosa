@@ -20,3 +20,10 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+  # Need to add the section below otherwise argo cd complains that the system is out of sync even when not.
+  # ArgoCD uses the image hash as a reference and does not seem to see that the corresponding tag version/name is the same
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/template/spec/containers/0/image
