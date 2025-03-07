@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: httpd-example
 spec:
-  host: ""  # APPLICATION_DOMAIN is empty by default
+  host: "httpd-example-httpd-example.apps.rosa.aws-sandbox.457c.p3.openshiftapps.com"  # APPLICATION_DOMAIN is empty by default
   to:
     kind: Service
     name: httpd-example
