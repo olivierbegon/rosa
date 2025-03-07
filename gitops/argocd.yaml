@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: httpd-example
+  namespace: openshift-gitops
+spec:
+  destination:
+    name: ''
+    namespace: httpd-example
+    server: https://kubernetes.default.svc
+  source:
+    path: httpd-example
+    repoURL: https://github.com/olivierbegon/rosa.git
+    targetRevision: main
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
