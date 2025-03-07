@@ -27,4 +27,4 @@ spec:
   output:
     to:
       kind: DockerImage
-      name: 'image-registry.openshift-image-registry.svc:5000/httpd-example/httpd-example:latest'
+      name: 'image-registry.openshift-image-registry.svc:5000/httpd-example/httpd-example:v1'
