@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: httpd-example
-          image: "image-registry.openshift-image-registry.svc:5000/httpd-example/httpd-example:v1"
+          image: "image-registry.openshift-image-registry.svc:5000/httpd-example/httpd-example:1.0.0"
           ports:
             - containerPort: 8080
           resources:
